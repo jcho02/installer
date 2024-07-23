@@ -27,12 +27,13 @@ func TFVars(
 	workersAsset *machines.Worker,
 	baseImage string,
 	clusterID *installconfig.ClusterID,
-	bootstrapIgn string,
-) ([]byte, error) {
+	bootstrapIgn string) ([]byte, error) {
 	var (
 		cloud        = installConfig.Config.Platform.OpenStack.Cloud
 		mastermpool  = installConfig.Config.ControlPlane.Platform.OpenStack
 		defaultmpool = installConfig.Config.OpenStack.DefaultMachinePlatform
+		disableFloatingIPs = installConfig.Config.OpenStack.DisableFloatingIPs
+		disableIngressIPs = installConfig.Config.OpenStack.DisableIngressIPs
 	)
 
 	conn, err := openstackdefaults.NewServiceClient(ctx, "network", openstackdefaults.DefaultClientOpts(cloud))
@@ -186,7 +187,9 @@ func TFVars(
 		Cloud                             string                            `json:"openstack_credentials_cloud,omitempty"`
 		FlavorName                        string                            `json:"openstack_master_flavor_name,omitempty"`
 		APIFloatingIP                     string                            `json:"openstack_api_floating_ip,omitempty"`
+		DisableFloatingIPs				  bool								`json:"openstack_disable_api_floating_ip,omitempty"`
 		IngressFloatingIP                 string                            `json:"openstack_ingress_floating_ip,omitempty"`
+		DisableIngressIPs                 bool								`json:"openstack_disable_ingress_floating_ip,omitempty"`
 		APIVIPs                           []string                          `json:"openstack_api_int_ips,omitempty"`
 		IngressVIPs                       []string                          `json:"openstack_ingress_ips,omitempty"`
 		OctaviaSupport                    bool                              `json:"openstack_octavia_support,omitempty"`
@@ -212,7 +215,9 @@ func TFVars(
 		Cloud:                             cloud,
 		FlavorName:                        masterSpecs[0].Flavor,
 		APIFloatingIP:                     installConfig.Config.Platform.OpenStack.APIFloatingIP,
+		DisableFloatingIPs:				   disableFloatingIPs,
 		IngressFloatingIP:                 installConfig.Config.Platform.OpenStack.IngressFloatingIP,
+		DisableIngressIPs:				   disableIngressIPs,
 		APIVIPs:                           installConfig.Config.Platform.OpenStack.APIVIPs,
 		IngressVIPs:                       installConfig.Config.Platform.OpenStack.IngressVIPs,
 		OctaviaSupport:                    octaviaSupport,

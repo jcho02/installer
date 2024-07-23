@@ -20,3 +20,11 @@ variable "nodes_default_port" {
 variable "master_port_ids" {
   type = list(string)
 }
+
+variable "openstack_disable_floating_ip" {
+  type = bool
+}
+
+variable "openstack_disable_ingress_floating_ip" {
+  type = bool
+}

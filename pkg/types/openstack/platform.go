@@ -129,4 +129,12 @@ type Platform struct {
 	// LoadBalancer defines how the load balancer used by the cluster is configured.
 	// +optional
 	LoadBalancer *configv1.OpenStackPlatformLoadBalancer `json:"loadBalancer,omitempty"`
+
+	// DisableFloatingIPs will allow clusters to be created without the use of OpenStack FloatingIPs. Some Openstack
+	// configurations do not support floating IPs.
+	DisableFloatingIPs bool `json:"disableFloatingIPs,omitempty"`
+
+	// DisbaleIngressIPs will allow clusters to be created without the use of Openstack IngressIPs. Some Openstack
+	// configurations do not supporting ingress IPs.
+	DisableIngressIPs bool `json:"disableIngressIPs,omitempty"`
 }

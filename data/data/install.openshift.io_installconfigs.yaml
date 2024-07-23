@@ -824,6 +824,12 @@ spec:
                           items:
                             type: string
                           type: array
+                        disableFloatingIPs:
+                          description: Do not use floating IPs for this cluster
+                          type: boolean
+                        disableIngressIPs:
+                          description: Do not use Ingress IPs for this cluster
+                          type: boolean
                       required:
                       - type
                       type: object

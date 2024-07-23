@@ -268,6 +268,15 @@ EOF
 
 }
 
+variable "disable_openstack_api_floating_ip" {
+  type    = string
+  default = ""
+
+  description = <<EOF
+(optional) Disable Floating IP to attach to the Openshift API.
+EOF
+}
+
 variable "openstack_ingress_floating_ip" {
   type = string
   default = ""
@@ -276,6 +285,15 @@ variable "openstack_ingress_floating_ip" {
 (optional) Existing Floating IP to attach to the ingress port created by the installer.
 EOF
 
+}
+
+variable "disable_openstack_ingress_floating_ip" {
+  type = string
+  default = ""
+
+  description = <<EOF
+(optional) Disable Floating IP to attach to the ingress port.
+EOF
 }
 
 variable "openstack_api_int_ips" {
